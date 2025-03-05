@@ -2,7 +2,7 @@ class Nivel {
   final int id;
   final String nombre;
   final String descripcion;
-  final bool estado;
+  bool estado; // Cambiar a variable mutable
   final String imagenUrl; // Nueva propiedad para la URL de la imagen
 
   Nivel({
@@ -18,8 +18,12 @@ class Nivel {
       id: json['id'],
       nombre: json['nombre'],
       descripcion: json['descripcion'],
-      estado: json['estado'] == 1,
+      estado: json['estado'] as bool, // Correcto para bool en Supabase
       imagenUrl: json['imagen_url'] ?? '', // Cargar URL
     );
+  }
+
+  void toggleEstado() {
+    estado = !estado;
   }
 }
